@@ -29,9 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
     @Override
-     public void addEmployee(Employee employee){
-        employees.put(employee.getKey(), employee);
-        }
+     public void addEmployee(Employee employee) {
+            employees.put(employee.getKey(), employee);
+    }
 
 
         @Override
