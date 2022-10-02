@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exceptions.EmployeeAlreadyAddedException;
 import com.example.demo.exceptions.EmployeeNotFoundException;
 import com.example.demo.model.Employee;
 import org.springframework.stereotype.Service;
@@ -29,20 +30,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
     @Override
-     public void addEmployee(Employee employee) {
+     public Employee addEmployee(String lastName, String firstName, String middleName, String passport) {
+        Employee employee = new Employee(lastName, firstName, middleName, passport);
+        if(employees.containsKey(employee.getKey())){
+            throw new EmployeeAlreadyAddedException("Such employee already exists");
+        }
             employees.put(employee.getKey(), employee);
+        return employee;
     }
 
 
         @Override
     public Employee removeEmployee(String lastName, String firstName, String middleName, String passport) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getLastName().equals(lastName)
-                    && employees.get(i).getFirstName().equals(firstName)
-                    && employees.get(i).getMiddleName().equals(middleName)
-                    && employees.get(i).getPassport().equals(passport)) {
-                return employees.remove(i);
-            }
+        Employee employee = new Employee(lastName, firstName, middleName, passport);
+        if(employees.containsKey(employee.getKey())){
+            return employees.remove(employee.getKey());
         }
         throw new EmployeeNotFoundException("Employee not found");
     }

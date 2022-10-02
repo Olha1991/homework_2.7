@@ -22,7 +22,7 @@ public class EmployeeController {
         return employeeService.printAllEmployee();
     }
     @GetMapping(path = "/add")
-    public String addEmployee (@RequestParam("lastName") String lastName,
+    public Employee addEmployee (@RequestParam("lastName") String lastName,
                              @RequestParam("firstName") String firstName,
                              @RequestParam("middleName") String middleName,
                              @RequestParam("passport") String passport) {
@@ -32,8 +32,7 @@ public class EmployeeController {
                 middleName,
                 passport
         );
-        employeeService.addEmployee(employee);
-        return "Employee added";
+        return employeeService.addEmployee(lastName, firstName, middleName, passport);
     }
 
     @GetMapping(path = "/remove")

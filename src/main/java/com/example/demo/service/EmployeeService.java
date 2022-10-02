@@ -7,10 +7,8 @@ import java.util.Map;
 public interface EmployeeService {
 
     Map<String, Employee> printAllEmployee();
-
-    void addEmployee(Employee employee);
+    Employee addEmployee(String lastName, String firstName, String middleName, String passport);
     Employee removeEmployee(String lastName, String firstName, String middleName, String passport);
     public String findEmployee(String passport);
-
 
 }
